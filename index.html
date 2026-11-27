@@ -2,36 +2,344 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Les chevaux</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173f35">
+  <meta name="description" content="Découvrez les chevaux, leurs races, des conseils pour leur bien-être et une sélection d'équipements équestres.">
+  <title>Les chevaux — Le Cheval au Naturel</title>
   <style>
+    :root {
+      --forest: #173f35;
+      --forest-light: #245b4b;
+      --cream: #f8f6ef;
+      --paper: #fffefa;
+      --sand: #e9e1d1;
+      --ink: #26332e;
+      --muted: #64716b;
+      --orange: #d4774c;
+      --shadow: 0 16px 40px rgba(34, 49, 41, .09);
+      --radius: 20px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 0 20px;
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      color: #333;
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      line-height: 1.65;
     }
-    h1 {
-      color: #4a2c2a;
+    a { color: inherit; }
+    button { font: inherit; }
+    .container { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+    .topline { background: var(--forest); color: #f9f6ec; text-align: center; padding: 7px 16px; font-size: .82rem; letter-spacing: .04em; }
+    header { position: sticky; top: 0; z-index: 10; background: rgba(248,246,239,.96); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(23,63,53,.1); }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; color: var(--forest); font-size: 1.06rem; letter-spacing: -.03em; white-space: nowrap; }
+    .brand-mark { display: grid; place-items: center; width: 40px; height: 40px; background: var(--forest); color: white; border-radius: 50% 50% 50% 12px; font-size: 1.25rem; }
+    .nav-links { display: flex; align-items: center; gap: clamp(14px, 2.5vw, 30px); }
+    .nav-links a { text-decoration: none; font-size: .92rem; font-weight: 700; }
+    .nav-links a:hover { color: var(--orange); }
+    .cart-button { border: 0; background: var(--forest); color: white; padding: 11px 15px; border-radius: 999px; cursor: pointer; font-weight: 700; white-space: nowrap; }
+    .cart-button:hover, .button-primary:hover { background: var(--forest-light); transform: translateY(-1px); }
+    .hero { padding: 78px 0 70px; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+    .eyebrow { color: var(--orange); font-size: .78rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 20px; color: var(--forest); font: 800 clamp(2.7rem, 6vw, 5rem)/1.04 Georgia, serif; letter-spacing: -.055em; }
+    h1 em { color: var(--orange); font-weight: 600; }
+    .hero-copy { max-width: 580px; color: var(--muted); font-size: 1.12rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; padding: 11px 19px; border-radius: 999px; text-decoration: none; font-weight: 800; transition: .2s ease; cursor: pointer; }
+    .button-primary { background: var(--forest); color: white; border: 1px solid var(--forest); }
+    .button-secondary { border: 1px solid #c9c4b8; color: var(--forest); background: transparent; }
+    .button-secondary:hover { background: white; }
+    .hero-art { min-height: 360px; position: relative; display: grid; place-items: center; border-radius: 48% 48% 28px 28px; background: linear-gradient(160deg, #dce5d2, #c0d0b8 52%, #8da78d); overflow: hidden; }
+    .hero-art::before, .hero-art::after { content: ""; position: absolute; width: 115%; height: 46%; bottom: -19%; left: -8%; background: #68866b; border-radius: 50%; transform: rotate(-8deg); }
+    .hero-art::after { background: #496d58; bottom: -32%; left: 18%; transform: rotate(9deg); }
+    .horse-illustration { position: relative; z-index: 1; font-size: clamp(8rem, 20vw, 13rem); filter: drop-shadow(0 15px 9px rgba(42,52,40,.2)); transform: translateY(-15px); }
+    .art-note { position: absolute; z-index: 2; bottom: 20px; right: 20px; background: var(--paper); border-radius: 14px; padding: 10px 14px; box-shadow: var(--shadow); font-size: .85rem; font-weight: 700; }
+    section { padding: 76px 0; }
+    .section-heading { max-width: 670px; margin-bottom: 34px; }
+    .section-heading h2 { color: var(--forest); font: 700 clamp(2rem, 4vw, 3.1rem)/1.12 Georgia, serif; letter-spacing: -.035em; margin: 8px 0 12px; }
+    .section-heading p { color: var(--muted); margin-bottom: 0; }
+    .intro-section { background: var(--paper); }
+    .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 42px; align-items: start; }
+    .fact-box { border-left: 3px solid var(--orange); padding: 7px 0 7px 20px; color: var(--muted); }
+    .fact-box strong { display: block; color: var(--forest); margin-bottom: 5px; }
+    .breed-grid, .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .breed-card, .product-card, .horse-card { background: var(--paper); border: 1px solid rgba(23,63,53,.08); border-radius: var(--radius); overflow: hidden; box-shadow: 0 5px 20px rgba(34,49,41,.035); }
+    .breed-top { height: 132px; display: grid; place-items: center; background: linear-gradient(135deg, #e8dfce, #d8e2d2); font-size: 4.2rem; }
+    .breed-card:nth-child(2) .breed-top { background: linear-gradient(135deg, #ead7c9, #e7e0d1); }
+    .breed-card:nth-child(3) .breed-top { background: linear-gradient(135deg, #d7e4dc, #e6e2ce); }
+    .breed-card:nth-child(4) .breed-top { background: linear-gradient(135deg, #e6dac8, #d5dfd1); }
+    .card-content { padding: 20px; }
+    .card-content h3 { color: var(--forest); font: 700 1.35rem Georgia, serif; margin-bottom: 8px; }
+    .card-content p { color: var(--muted); font-size: .92rem; margin-bottom: 13px; }
+    .tag { display: inline-block; border-radius: 999px; padding: 4px 10px; color: var(--forest); background: #eaf0e8; font-size: .75rem; font-weight: 800; }
+    .adoption-section { background: #edf0e8; }
+    .notice { margin: -10px 0 24px; padding: 14px 17px; border-radius: 12px; background: #fff8e9; color: #665735; font-size: .88rem; border: 1px solid #eddfbd; }
+    .horse-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .horse-art { min-height: 140px; display: grid; place-items: center; background: linear-gradient(145deg, #d8e3d3, #bdcdb7); font-size: 4.7rem; }
+    .horse-card:nth-child(2) .horse-art { background: linear-gradient(145deg, #e9ddcc, #d9c6ad); }
+    .horse-card:nth-child(3) .horse-art { background: linear-gradient(145deg, #d5e0dc, #bdccc3); }
+    .horse-card .card-content { padding: 21px; }
+    .horse-card h3 { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .horse-details { display: grid; grid-template-columns: 1fr 1fr; gap: 7px 12px; margin: 15px 0 19px; color: var(--muted); font-size: .85rem; }
+    .horse-details strong { color: var(--ink); }
+    .horse-card .button { width: 100%; }
+    .shop-section { background: var(--paper); }
+    .product-top { height: 145px; display: grid; place-items: center; background: #f0eee5; font-size: 4.2rem; }
+    .product-card:nth-child(2) .product-top { background: #e9eee7; }
+    .product-card:nth-child(3) .product-top { background: #f2e8de; }
+    .product-card:nth-child(4) .product-top { background: #e8e9df; }
+    .product-card .card-content { display: flex; flex-direction: column; min-height: 206px; }
+    .price { color: var(--forest); font-weight: 900; font-size: 1.2rem; margin: auto 0 12px; }
+    .add-button { border: 0; width: 100%; background: var(--forest); color: white; }
+    .add-button:hover { background: var(--forest-light); }
+    .wellbeing { background: var(--forest); color: #f8f6ef; }
+    .wellbeing .section-heading h2 { color: white; }
+    .wellbeing .section-heading p { color: #d0ddd4; }
+    .care-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .care-card { padding: 23px; border: 1px solid rgba(255,255,255,.2); border-radius: var(--radius); background: rgba(255,255,255,.06); }
+    .care-card span { font-size: 1.7rem; }
+    .care-card h3 { margin: 10px 0 6px; }
+    .care-card p { margin: 0; color: #d0ddd4; font-size: .92rem; }
+    .contact-section { text-align: center; }
+    .contact-panel { padding: 38px; border-radius: 28px; background: #e9e1d1; }
+    .contact-panel h2 { color: var(--forest); font: 700 clamp(2rem,4vw,3rem) Georgia,serif; margin-bottom: 10px; }
+    .contact-panel p { color: var(--muted); max-width: 600px; margin: 0 auto 22px; }
+    footer { background: #112f28; color: #e4e9e3; padding: 28px 0; font-size: .85rem; }
+    .footer-row { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .modal-backdrop { position: fixed; inset: 0; z-index: 30; display: none; place-items: center; padding: 20px; background: rgba(13,28,23,.55); }
+    .modal-backdrop.open { display: grid; }
+    .modal { width: min(520px, 100%); max-height: 85vh; overflow: auto; padding: 25px; border-radius: 20px; background: var(--paper); box-shadow: var(--shadow); }
+    .modal-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+    .modal-head h2 { color: var(--forest); font: 700 1.7rem Georgia,serif; margin: 0; }
+    .close-button { border: 0; background: #eeeae0; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; }
+    .cart-items { padding: 12px 0; }
+    .cart-line { display: flex; justify-content: space-between; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--sand); }
+    .cart-line small { display: block; color: var(--muted); }
+    .cart-total { display: flex; justify-content: space-between; padding: 16px 0; font-weight: 900; color: var(--forest); }
+    .empty-cart { padding: 22px 0; color: var(--muted); }
+    .modal-note { color: var(--muted); font-size: .82rem; margin: 10px 0 0; }
+    .toast { position: fixed; z-index: 40; bottom: 22px; left: 50%; transform: translate(-50%, 20px); opacity: 0; pointer-events: none; background: var(--forest); color: white; padding: 12px 18px; border-radius: 999px; box-shadow: var(--shadow); transition: .25s ease; }
+    .toast.show { transform: translate(-50%, 0); opacity: 1; }
+    @media (max-width: 850px) {
+      .nav-links { gap: 12px; }
+      .nav-links a { font-size: .82rem; }
+      .breed-grid, .product-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-grid { gap: 25px; }
     }
+    @media (max-width: 650px) {
+      .container { width: min(100% - 28px, 540px); }
+      .nav { min-height: 66px; flex-wrap: wrap; padding: 10px 0; gap: 10px; }
+      .brand { font-size: .95rem; }
+      .brand-mark { width: 34px; height: 34px; }
+      .nav-links { order: 3; width: 100%; overflow-x: auto; padding: 3px 0 5px; }
+      .nav-links a { white-space: nowrap; }
+      .cart-button { padding: 9px 12px; font-size: .85rem; }
+      .hero { padding: 48px 0; }
+      .hero-grid, .intro-grid { grid-template-columns: 1fr; }
+      .hero-art { min-height: 260px; }
+      section { padding: 55px 0; }
+      .horse-grid, .care-grid { grid-template-columns: 1fr; }
+      .contact-panel { padding: 27px 19px; }
+      .footer-row { display: block; }
+    }
+    @media (max-width: 390px) { .breed-grid, .product-grid { grid-template-columns: 1fr; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; } }
   </style>
 </head>
 <body>
+  <div class="topline">Le bien-être du cheval avant tout · Découvrez, apprenez et prenez soin</div>
+  <header>
+    <nav class="nav container" aria-label="Navigation principale">
+      <a class="brand" href="#accueil"><span class="brand-mark" aria-hidden="true">♞</span> Le Cheval au Naturel</a>
+      <div class="nav-links">
+        <a href="#decouvrir">Découvrir</a>
+        <a href="#races">Les races</a>
+        <a href="#adoption">Adoption</a>
+        <a href="#boutique">Boutique</a>
+        <a href="#conseils">Bien-être</a>
+      </div>
+      <button class="cart-button" id="open-cart" type="button" aria-label="Ouvrir le panier">🛒 Panier <span id="cart-count">0</span></button>
+    </nav>
+  </header>
+
   <main>
-    <h1>Les chevaux</h1>
-    <p>
-      Le cheval est un grand mammifère herbivore apprécié depuis des siècles
-      pour sa force, sa rapidité et sa fidélité. Il existe de nombreuses races,
-      chacune ayant ses caractéristiques propres, telles que la morphologie,
-      la robe ou le tempérament.
-    </p>
-    <p>
-      Les chevaux peuvent être employés pour l’équitation, le travail agricole,
-      les loisirs, les sports équestres ou simplement comme animaux de compagnie.
-      Leur relation avec l’humain repose sur la confiance, l’attention et le soin.
-    </p>
+    <section class="hero" id="accueil">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Une passion, un compagnon</span>
+          <h1>Le cheval,<br><em>bien plus qu’un animal.</em></h1>
+          <p class="hero-copy">Un guide pour mieux connaître les chevaux, découvrir leurs races, accompagner une adoption responsable et choisir le nécessaire pour leur bien-être.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#decouvrir">Explorer le site <span aria-hidden="true">↓</span></a>
+            <a class="button button-secondary" href="#adoption">Voir l’adoption</a>
+          </div>
+        </div>
+        <div class="hero-art" role="img" aria-label="Illustration décorative d'un cheval dans un paysage verdoyant">
+          <span class="horse-illustration" aria-hidden="true">🐎</span>
+          <span class="art-note">Respect · Confiance · Nature</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="intro-section" id="decouvrir">
+      <div class="container intro-grid">
+        <div class="section-heading">
+          <span class="eyebrow">Mieux les comprendre</span>
+          <h2>Un compagnon sensible et intelligent</h2>
+          <p>Le cheval est un herbivore social qui a besoin de mouvement, de contacts avec ses congénères et d’un environnement adapté. Chaque cheval a son tempérament, son histoire et ses besoins.</p>
+        </div>
+        <div>
+          <div class="fact-box"><strong>Une vie en mouvement</strong>La marche et le pâturage occupent naturellement une grande place dans sa journée.</div>
+          <div class="fact-box" style="margin-top:20px"><strong>Un animal grégaire</strong>Les interactions avec d’autres chevaux contribuent à son équilibre et à son bien-être.</div>
+          <div class="fact-box" style="margin-top:20px"><strong>Des soins réguliers</strong>Alimentation, eau, suivi vétérinaire, maréchalerie et attention quotidienne sont essentiels.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="races">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Des profils variés</span>
+          <h2>Quelques races de chevaux</h2>
+          <p>Chaque race possède des caractéristiques générales, mais le caractère et les aptitudes varient d’un individu à l’autre.</p>
+        </div>
+        <div class="breed-grid">
+          <article class="breed-card"><div class="breed-top" aria-hidden="true">🐴</div><div class="card-content"><h3>Pur-sang arabe</h3><p>Reconnu pour son endurance, son élégance et sa grande vivacité. Il est souvent apprécié en randonnée et en endurance.</p><span class="tag">Endurance</span></div></article>
+          <article class="breed-card"><div class="breed-top" aria-hidden="true">🐎</div><div class="card-content"><h3>Frison</h3><p>Cheval à la robe généralement noire, à la crinière abondante et aux allures relevées. Il attire par sa présence.</p><span class="tag">Attelage · Spectacle</span></div></article>
+          <article class="breed-card"><div class="breed-top" aria-hidden="true">🐴</div><div class="card-content"><h3>Comtois</h3><p>Cheval de trait originaire de Franche-Comté, réputé pour sa force et son tempérament souvent calme.</p><span class="tag">Trait · Loisirs</span></div></article>
+          <article class="breed-card"><div class="breed-top" aria-hidden="true">🐎</div><div class="card-content"><h3>Connemara</h3><p>Poney originaire d’Irlande, polyvalent et apprécié pour les activités équestres et les sports.</p><span class="tag">Polyvalent</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="adoption-section" id="adoption">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Une démarche réfléchie</span>
+          <h2>Chevaux à l’adoption</h2>
+          <p>Adopter engage sur le long terme. Prenez le temps d’évaluer votre expérience, votre budget, vos installations et les besoins du cheval avec une association ou un professionnel.</p>
+        </div>
+        <div class="notice"><strong>Exemples de fiches :</strong> les profils ci-dessous sont fictifs et servent uniquement à illustrer la présentation. Ils ne correspondent pas à des chevaux réellement disponibles à l’adoption.</div>
+        <div class="horse-grid">
+          <article class="horse-card">
+            <div class="horse-art" aria-hidden="true">🐴</div>
+            <div class="card-content"><h3>Orion <span class="tag">Fictif</span></h3><p>Un compagnon posé, présenté ici comme exemple de fiche d’adoption.</p><div class="horse-details"><span><strong>Âge :</strong> 12 ans</span><span><strong>Type :</strong> Selle français</span><span><strong>Taille :</strong> 1,62 m</span><span><strong>Sexe :</strong> Hongre</span><span><strong>Niveau :</strong> Intermédiaire</span><span><strong>Vie :</strong> Pré / box</span></div><a class="button button-secondary adoption-button" href="#contact" data-horse="Orion">Se renseigner</a></div>
+          </article>
+          <article class="horse-card">
+            <div class="horse-art" aria-hidden="true">🐎</div>
+            <div class="card-content"><h3>Praline <span class="tag">Fictive</span></h3><p>Une ponette imaginaire, idéale pour montrer les informations utiles d’une annonce.</p><div class="horse-details"><span><strong>Âge :</strong> 9 ans</span><span><strong>Type :</strong> Poney croisé</span><span><strong>Taille :</strong> 1,45 m</span><span><strong>Sexe :</strong> Jument</span><span><strong>Niveau :</strong> À évaluer</span><span><strong>Vie :</strong> Pré conseillé</span></div><a class="button button-secondary adoption-button" href="#contact" data-horse="Praline">Se renseigner</a></div>
+          </article>
+          <article class="horse-card">
+            <div class="horse-art" aria-hidden="true">🐴</div>
+            <div class="card-content"><h3>Ébène <span class="tag">Fictif</span></h3><p>Un profil fictif pour rappeler qu’une annonce doit détailler santé et caractère.</p><div class="horse-details"><span><strong>Âge :</strong> 7 ans</span><span><strong>Type :</strong> Pur-sang</span><span><strong>Taille :</strong> 1,68 m</span><span><strong>Sexe :</strong> Hongre</span><span><strong>Niveau :</strong> Confirmé</span><span><strong>Vie :</strong> Compagnons requis</span></div><a class="button button-secondary adoption-button" href="#contact" data-horse="Ébène">Se renseigner</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="shop-section" id="boutique">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">La petite boutique</span>
+          <h2>Équipement & soins</h2>
+          <p>Une sélection d’exemples pour illustrer la boutique. Choisissez un article pour l’ajouter au panier.</p>
+        </div>
+        <div class="product-grid">
+          <article class="product-card"><div class="product-top" aria-hidden="true">🪮</div><div class="card-content"><h3>Kit de pansage</h3><p>Brosses et cure-pied pour l’entretien quotidien.</p><span class="price">24,90 €</span><button class="button add-button" type="button" data-name="Kit de pansage" data-price="24.90">Ajouter au panier</button></div></article>
+          <article class="product-card"><div class="product-top" aria-hidden="true">🧴</div><div class="card-content"><h3>Baume pour sabots</h3><p>Soin d’entretien externe. Demandez conseil en cas de problème de santé.</p><span class="price">12,50 €</span><button class="button add-button" type="button" data-name="Baume pour sabots" data-price="12.50">Ajouter au panier</button></div></article>
+          <article class="product-card"><div class="product-top" aria-hidden="true">🧤</div><div class="card-content"><h3>Gants d’équitation</h3><p>Une paire confortable pour accompagner vos séances.</p><span class="price">18,00 €</span><button class="button add-button" type="button" data-name="Gants d’équitation" data-price="18.00">Ajouter au panier</button></div></article>
+          <article class="product-card"><div class="product-top" aria-hidden="true">🧺</div><div class="card-content"><h3>Trousse de soins</h3><p>Une trousse vide pour ranger le petit matériel de premiers soins.</p><span class="price">16,90 €</span><button class="button add-button" type="button" data-name="Trousse de soins" data-price="16.90">Ajouter au panier</button></div></article>
+        </div>
+        <p class="modal-note" style="margin-top:18px">Catalogue de démonstration : les articles et tarifs sont des exemples. Le panier est interactif, mais aucun paiement ni commande réelle n’est effectué.</p>
+      </div>
+    </section>
+
+    <section class="wellbeing" id="conseils">
+      <div class="container">
+        <div class="section-heading"><span class="eyebrow">Prendre soin au quotidien</span><h2>Le bien-être d’abord</h2><p>Quelques repères généraux : chaque cheval est différent. Pour toute question de santé, demandez conseil à un vétérinaire.</p></div>
+        <div class="care-grid">
+          <article class="care-card"><span aria-hidden="true">🌿</span><h3>Alimentation adaptée</h3><p>Du fourrage de qualité, de l’eau propre à volonté et une ration adaptée à son activité et à son état.</p></article>
+          <article class="care-card"><span aria-hidden="true">🩺</span><h3>Suivi professionnel</h3><p>Organisez les visites vétérinaires, les soins dentaires et le suivi des pieds avec des professionnels.</p></article>
+          <article class="care-card"><span aria-hidden="true">🤝</span><h3>Temps et relation</h3><p>Des interactions calmes, des sorties et des contacts sociaux contribuent à son équilibre.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+      <div class="container"><div class="contact-panel"><span class="eyebrow">Un projet d’adoption ?</span><h2>Préparez votre rencontre</h2><p>Pour une adoption réelle, contactez une association ou un refuge équin et demandez un bilan complet : santé, comportement, historique, conditions d’accueil et suivi après adoption.</p><a class="button button-primary" href="#adoption">Revoir les fiches exemples</a></div></div>
+    </section>
   </main>
+
+  <footer><div class="container footer-row"><span>© <span id="year"></span> Le Cheval au Naturel</span><span>Un site de découverte — les annonces et produits présentés sont fictifs.</span></div></footer>
+
+  <div class="modal-backdrop" id="cart-modal" role="dialog" aria-modal="true" aria-labelledby="cart-title" aria-hidden="true">
+    <div class="modal"><div class="modal-head"><h2 id="cart-title">Votre panier</h2><button class="close-button" id="close-cart" type="button" aria-label="Fermer le panier">×</button></div><div class="cart-items" id="cart-items"></div><div class="cart-total"><span>Total indicatif</span><span id="cart-total">0,00 €</span></div><button class="button button-primary" id="checkout" type="button" style="width:100%">Continuer</button><p class="modal-note">Boutique de démonstration : aucune commande ou transaction réelle ne sera réalisée.</p></div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const cart = new Map();
+    const cartModal = document.getElementById('cart-modal');
+    const toast = document.getElementById('toast');
+    let toastTimer;
+
+    function formatPrice(value) {
+      return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(value);
+    }
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
+    }
+    function updateCart() {
+      const count = [...cart.values()].reduce((sum, item) => sum + item.quantity, 0);
+      document.getElementById('cart-count').textContent = count;
+      const items = document.getElementById('cart-items');
+      const entries = [...cart.values()];
+      if (!entries.length) {
+        items.innerHTML = '<p class="empty-cart">Votre panier est vide pour le moment.</p>';
+      } else {
+        items.innerHTML = entries.map(item => `<div class="cart-line"><span>${item.name}<small>Quantité : ${item.quantity}</small></span><strong>${formatPrice(item.price * item.quantity)}</strong></div>`).join('');
+      }
+      const total = entries.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      document.getElementById('cart-total').textContent = formatPrice(total);
+    }
+    document.querySelectorAll('.add-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const { name, price } = button.dataset;
+        const item = cart.get(name) || { name, price: Number(price), quantity: 0 };
+        item.quantity += 1;
+        cart.set(name, item);
+        updateCart();
+        showToast(`${name} ajouté au panier`);
+      });
+    });
+    function openCart() {
+      updateCart();
+      cartModal.classList.add('open');
+      cartModal.setAttribute('aria-hidden', 'false');
+      document.getElementById('close-cart').focus();
+    }
+    function closeCart() {
+      cartModal.classList.remove('open');
+      cartModal.setAttribute('aria-hidden', 'true');
+      document.getElementById('open-cart').focus();
+    }
+    document.getElementById('open-cart').addEventListener('click', openCart);
+    document.getElementById('close-cart').addEventListener('click', closeCart);
+    cartModal.addEventListener('click', event => { if (event.target === cartModal) closeCart(); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape' && cartModal.classList.contains('open')) closeCart(); });
+    document.getElementById('checkout').addEventListener('click', () => showToast('La boutique est une démonstration : aucune commande réelle.'));
+    document.querySelectorAll('.adoption-button').forEach(button => {
+      button.addEventListener('click', () => showToast(`La fiche de ${button.dataset.horse} est un exemple fictif.`));
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+    updateCart();
+  </script>
 </body>
 </html>
